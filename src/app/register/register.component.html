@@ -5,6 +5,7 @@
     </mat-card-header>
 
     <mat-card-content>
+        <!-- #register baraye chek cardan candition isLogin et 'Register'}} -->
         <form (ngSubmit)="onSubmit()" #register="ngForm">
             <div>
                 <mat-form-field appearance="outline">
@@ -15,20 +16,24 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="password" name="password1" [(ngModel)]="user.password"
-                        required>
+                    <input matInput type="password"  placeholder="password" name="password" [(ngModel)]="user.password" required>
                 </mat-form-field>
             </div>
-            <div>
+            <div *ngIf="!isLogin">
                 <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="repeter votre password" name="password2" [(ngModel)]="user.password"
-                        required>
+                    <mat-label>Repeat Password</mat-label>
+                    <input matInput type="password" placeholder="Repeat password" name="repeat-password" [(ngModel)]="repeat" required>
                 </mat-form-field>
             </div>
-            <button mat-raised-button color="primary" [disabled]="register.form.invalid">Register</button>
+            <button mat-raised-button color="primary" [disabled]="register.form.invalid || (!isLogin && repeat != user.password)">
+                {{isLogin ? 'Login':'Register'}}
+            </button>
+            <button mat-raised-button color="secondary" type="button" (click)="isLogin = !isLogin">
+                {{!isLogin ? 'Login':'Register'}}
+            </button>
         </form>
         <p *ngIf="feedback">{{feedback}}</p>
+        <p *ngIf="!isLogin && repeat != user.password">Password does not match</p>
     </mat-card-content>
     <!-- <mat-card-actions align="end">
         <button mat-button>LIKE</button>

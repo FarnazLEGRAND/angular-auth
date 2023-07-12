@@ -13,4 +13,6 @@ export class AuthService {
   addUser(user:User){
     return this.http.post<User>(environment.serverURL+'/api/user', user);
   }
+
+
 }

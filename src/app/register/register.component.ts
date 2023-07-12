@@ -12,6 +12,8 @@ export class RegisterComponent {
 user:User={email:'',password:''};
 feedback=''
 isLogin =false;
+// repeat hamoun password2
+repeat="";
 constructor(private authService:AuthService){}
 
   onSubmit(){
@@ -26,3 +28,4 @@ constructor(private authService:AuthService){}
 }
 
 }
+
