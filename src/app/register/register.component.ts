@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { User } from '../entities';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -14,7 +17,7 @@ feedback=''
 isLogin =false;
 // repeat hamoun password2 ast
 repeat="";
-constructor(private authService:AuthService){}
+constructor(private authService:AuthService, private location:Location){}
 
   onSubmit(){
 //     this.authService.addUser(this.user).subscribe(()=>this.feedback='subcription sucess')
@@ -29,16 +32,15 @@ constructor(private authService:AuthService){}
 //   });
 // }
 
-
 if(!this.isLogin) {
 
   this.authService.addUser(this.user).subscribe({
-    complete:() => this.feedback ='Registration complete.',
+    complete:() => {this.feedback ='Registration complete.'; this.isLogin = true},
     error: () => this.feedback = 'User already exists'
   });
 } else {
   this.authService.login(this.user).subscribe({
-    complete:() => this.feedback ='Login successful.',
+    complete:() => this.location.back(),
     error: () => this.feedback = 'Credentials error'
   });
 }

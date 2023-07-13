@@ -7,10 +7,10 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  constructor(private authService:AuthService){}
+// on est ubliger mettre notre Authservice en public
+constructor(public authService:AuthService){}
 // ajouter get user par symfony Token
-  checkIfLogged() {
-    this.authService.getUser().subscribe(data => console.log(data));
-  }
+checkIfLogged() {
+  this.authService.getUser().subscribe(data => console.log(data));
+}
 }
