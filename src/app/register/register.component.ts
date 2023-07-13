@@ -12,7 +12,7 @@ export class RegisterComponent {
 user:User={email:'',password:''};
 feedback=''
 isLogin =false;
-// repeat hamoun password2
+// repeat hamoun password2 ast
 repeat="";
 constructor(private authService:AuthService){}
 
@@ -21,11 +21,27 @@ constructor(private authService:AuthService){}
 //   }
 // }
 // exo faire avec material.angular formulaire
+
+
+//   this.authService.addUser(this.user).subscribe({
+//     complete:() => this.feedback ='Registration complete.',
+//     error: () => this.feedback = 'User already exists'
+//   });
+// }
+
+
+if(!this.isLogin) {
+
   this.authService.addUser(this.user).subscribe({
     complete:() => this.feedback ='Registration complete.',
     error: () => this.feedback = 'User already exists'
   });
+} else {
+  this.authService.login(this.user).subscribe({
+    complete:() => this.feedback ='Login successful.',
+    error: () => this.feedback = 'Credentials error'
+  });
+}
 }
 
 }
-
